@@ -1,19 +1,16 @@
 # Gitea with Tor and Caddy Setup
 
-This project sets up a Gitea instance accessible via a Tor hidden service, using Docker and Caddy.
+This project sets up a Gitea instance accessible via a Tor hidden service, using Docker.
 
-Gitea instance is hidden behind Caddy server without access to the network.
+Gitea instance is hidden behind Caddy server without access to the network. D
 
 ## Security Disclaimer
 
-This configuration uses self-signed certificates. It is recommended to generate certificates from a trusted Certificate Authority (CA).
+This configuration uses self-signed certificates, so you will get a browser warning about an untrusted CA when opening the Tor-hosted webpage using SSL. When needed, generate certificates from a trusted Certificate Authority (CA) for better security.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed on your system:
-
-- Docker
-- Docker Compose
+Before you begin, ensure you have docker installed on your system.
 
 ## Getting Started
 
@@ -28,13 +25,19 @@ cd tor-gitea
 
 ### 2. Setup gitea admin accounts
 
-Via tor-browser gitea web interface configure admin account and initial settings.
+Using tor-browser visit gitea web interface and configure initial settings and admin account.
 
-### 3. Configure ssh
+### 3. Setup gitea
+
+Setup user account(s), SSH keys, repositories.
+
+### 4. Configure ssh clinet for repository access
+
+1. Install openbsd-netcat and tor
+2. Start tor service
+3. add entry to ~/.ssh/config
 
 ```
 Host *.onion
-    ProxyCommand nc -X 5 -x localhost:9050  %h %p
+    ProxyCommand nc -X 5 -x localhost:9050 %h %p
 ```
-
-Where localhost:9050 is location of your tor instance listening for socks connections.
