@@ -2,6 +2,8 @@
 
 This project sets up a Gitea instance accessible via a Tor hidden service, using Docker and Caddy.
 
+Gitea instance is hidden behind Caddy server without access to the network.
+
 ## Security Disclaimer
 
 This configuration uses self-signed certificates. It is recommended to generate certificates from a trusted Certificate Authority (CA).
@@ -25,6 +27,8 @@ cd tor-gitea
 ```
 
 ### 2. Setup gitea admin accounts
+
+Via tor-browser gitea web interface configure admin account and initial settings.
 
 ### 3. Configure ssh
 
