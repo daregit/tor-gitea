@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euxo pipefail
+set -euo pipefail
 
 SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
 
