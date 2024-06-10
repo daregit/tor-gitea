@@ -1,0 +1,34 @@
+networks:
+  isolated:
+    internal: true
+
+services:
+  tor-node:
+    build: .
+    volumes:
+      - ./data/tor:/var/lib/tor
+    networks:
+      - isolated
+      - default
+    links:
+      - caddy
+  caddy:
+    image: caddy:latest
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./data/caddy:/data
+      - ./data/caddy_config:/config
+    links:
+      - gitea
+    networks:
+      - isolated
+  gitea:
+    image: gitea/gitea:latest
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    volumes:
+      - ./data/gitea:/data
+    networks:
+      - isolated
