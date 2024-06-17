@@ -12,6 +12,7 @@ services:
       - default
     links:
       - caddy
+      - gitea
   caddy:
     image: caddy:latest
     volumes:
